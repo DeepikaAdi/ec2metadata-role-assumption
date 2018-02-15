@@ -13,7 +13,8 @@ Configuring the ec2 metadata endpoint requires superuser privileges to create th
 
 # Quick Start
 
-Ensure that `~/.aws/credentials` holds your IAM profiles with keys and secrets.   **See note about the default profile**
+Ensure that `~/.aws/credentials` holds your IAM profiles with keys and secrets: https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html  
+**See note about the default profile**
 ```
 ./setup.sh
 make daemon
@@ -42,7 +43,7 @@ Before beginning, run `setup.sh`. This will create the `iptables`/`pfctl` rules 
 
 ##### `default` profile supercedes metadata service
 
-The metadata service is the _lowest_ priority in the order of precedence. This means that if you have a `default` profile in the `.aws` configurations exposed to an applicaiton, this will _override_ the metadata service.  
+The metadata service is the _lowest_ priority in the order of precedence. This means that if you have a `default` profile in the `.aws` configurations exposed to an application, this will _override_ the metadata service.  
 
 You can still use the application anywhere that doesn't expose `~/.aws` - for example docker containers or virtual machines - but it won't show the assumed role in `aws sts get-caller-identity` from the ec2 metadata service ( which uses `~/.aws` itself to generate session tokens) or from your local machine.  I recommend naming each profile something _other_ than default if you use multiple accounts, and just specifying the correct profile for `aws` commands with `--profile`. 
 
@@ -68,7 +69,7 @@ make
 
 If this fails because `make` is not available, simply `cat Makefile` and you'll be on your way to running the very simple invocation of `docker run ... ` to produce a running server.
 
-### Launchiung as a daemon
+### Launching as a daemon
 
 ```
 make daemon
